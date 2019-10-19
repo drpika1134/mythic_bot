@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/includes %>
+    <title>Mythic | Bank Account</title>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+      }
+
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      tr td {
+        padding: 5px;
+        width: 1%;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <p><%= user %></p>
+    <a href="/logout">Log out</a>
+    <div class="account">
+      <p>Your bank account</p>
+      <table>
+        <tr>
+          <th>Money</th>
+          <th>Food</th>
+          <th>Gasoline</th>
+          <th>Munition</th>
+          <th>Steel</th>
+          <th>Aluminum</th>
+          <th>Uranium</th>
+          <th>Coal</th>
+          <th>Oil</th>
+          <th>Lead</th>
+          <th>Iron</th>
+          <th>Bauxite</th>
+        </tr>
+        <tr>
+          <td>$<%= Number(account.money).toLocaleString() %></td>
+          <td><%= Number(account.food).toLocaleString() %></td>
+          <td><%= Number(account.gasoline).toLocaleString() %></td>
+          <td><%= Number(account.munition).toLocaleString() %></td>
+          <td><%= Number(account.steel).toLocaleString() %></td>
+          <td><%= Number(account.alum).toLocaleString() %></td>
+          <td><%= Number(account.ura).toLocaleString() %></td>
+          <td><%= Number(account.coal).toLocaleString() %></td>
+          <td><%= Number(account.oil).toLocaleString() %></td>
+          <td><%= Number(account.lead).toLocaleString() %></td>
+          <td><%= Number(account.iron).toLocaleString() %></td>
+          <td><%= Number(account.bauxite).toLocaleString() %></td>
+        </tr>
+      </table>
+
+      <div class="all-members">
+        <p>All Members</p>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Money</th>
+            <th>Food</th>
+            <th>Gasoline</th>
+            <th>Munition</th>
+            <th>Steel</th>
+            <th>Aluminum</th>
+            <th>Uranium</th>
+            <th>Coal</th>
+            <th>Oil</th>
+            <th>Lead</th>
+            <th>Iron</th>
+            <th>Bauxite</th>
+          </tr>
+          <% users.forEach(user => { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td>$<%= Number(user.account.money).toLocaleString() %></td>
+            <td><%= Number(user.account.food).toLocaleString() %></td>
+            <td><%= Number(user.account.gasoline).toLocaleString() %></td>
+            <td><%= Number(user.account.munition).toLocaleString() %></td>
+            <td><%= Number(user.account.steel).toLocaleString() %></td>
+            <td><%= Number(user.account.alum).toLocaleString() %></td>
+            <td><%= Number(user.account.ura).toLocaleString() %></td>
+            <td><%= Number(user.account.coal).toLocaleString() %></td>
+            <td><%= Number(user.account.oil).toLocaleString() %></td>
+            <td><%= Number(user.account.lead).toLocaleString() %></td>
+            <td><%= Number(user.account.iron).toLocaleString() %></td>
+            <td><%= Number(user.account.bauxite).toLocaleString() %></td>
+          </tr>
+          <% }) %>
+        </table>
+      </div>
+    </div>
+    <div class="history-logs">
+      <p>Your logs history</p>
+      <div class="manually">
+        <form action="/account/addLog" method="POST">
+          <select name="type">
+            <option value="Deposit">Deposit</option>
+            <option value="Withdraw">Withdraw</option>
+          </select>
+          <input type="text" name="money" />
+          <input type="text" name="food" />
+          <input type="text" name="gasoline" />
+          <input type="text" name="munition" />
+          <input type="text" name="steel" />
+          <input type="text" name="alum" />
+          <input type="text" name="ura" />
+          <input type="text" name="coal" />
+          <input type="text" name="oil" />
+          <input type="text" name="lead" />
+          <input type="text" name="iron" />
+          <input type="text" name="bauxite" />
+          <input type="submit" />
+        </form>
+      </div>
+      <div class="automatically">
+        <% if (error_message != '') { %>
+        <p><%= error_message %></p>
+        <% } %>
+        <form action="/account/addLog" method="POST">
+          <select name="type">
+            <option value="Deposit">Deposit</option>
+            <option value="Withdraw">Withdraw</option>
+          </select>
+          <textarea name="resource" id="autoForm" cols="25" rows="5"></textarea>
+          <input type="submit" />
+        </form>
+      </div>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Money</th>
+          <th>Food</th>
+          <th>Gasoline</th>
+          <th>Munition</th>
+          <th>Steel</th>
+          <th>Aluminum</th>
+          <th>Uranium</th>
+          <th>Coal</th>
+          <th>Oil</th>
+          <th>Lead</th>
+          <th>Iron</th>
+          <th>Bauxite</th>
+        </tr>
+        <% logs.forEach(log => { %>
+        <tr>
+          <td><%= log.date %></td>
+          <td><%= log.type %></td>
+          <td>$<%= Number(log.resources.money).toLocaleString() %></td>
+          <td><%= Number(log.resources.food).toLocaleString() %></td>
+          <td><%= Number(log.resources.gasoline).toLocaleString() %></td>
+          <td><%= Number(log.resources.munition).toLocaleString() %></td>
+          <td><%= Number(log.resources.steel).toLocaleString() %></td>
+          <td><%= Number(log.resources.alum).toLocaleString() %></td>
+          <td><%= Number(log.resources.ura).toLocaleString() %></td>
+          <td><%= Number(log.resources.coal).toLocaleString() %></td>
+          <td><%= Number(log.resources.oil).toLocaleString() %></td>
+          <td><%= Number(log.resources.lead).toLocaleString() %></td>
+          <td><%= Number(log.resources.iron).toLocaleString() %></td>
+          <td><%= Number(log.resources.bauxite).toLocaleString() %></td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+  </body>
+</html>
