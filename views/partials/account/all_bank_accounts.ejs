@@ -1,0 +1,56 @@
+<div class="row all-bank-info">
+  <div class="col-md-12">
+    <h4 class="account-heading">All Members</h4>
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-header">
+        Bank accounts
+      </div>
+      <div class="card-body">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Money</th>
+              <th>Food</th>
+              <th>Gasoline</th>
+              <th>Munition</th>
+              <th>Steel</th>
+              <th>Aluminum</th>
+              <th>Uranium</th>
+              <th>Coal</th>
+              <th>Oil</th>
+              <th>Lead</th>
+              <th>Iron</th>
+              <th>Bauxite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.name %></td>
+              <td>$<%= Number(user.account.money).toLocaleString() %></td>
+              <td><%= Number(user.account.food).toLocaleString() %></td>
+              <td>
+                <%= Number(user.account.gasoline).toLocaleString() %>
+              </td>
+              <td>
+                <%= Number(user.account.munition).toLocaleString() %>
+              </td>
+              <td><%= Number(user.account.steel).toLocaleString() %></td>
+              <td><%= Number(user.account.alum).toLocaleString() %></td>
+              <td><%= Number(user.account.ura).toLocaleString() %></td>
+              <td><%= Number(user.account.coal).toLocaleString() %></td>
+              <td><%= Number(user.account.oil).toLocaleString() %></td>
+              <td><%= Number(user.account.lead).toLocaleString() %></td>
+              <td><%= Number(user.account.iron).toLocaleString() %></td>
+              <td>
+                <%= Number(user.account.bauxite).toLocaleString() %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

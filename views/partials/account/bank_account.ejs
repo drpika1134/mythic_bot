@@ -1,0 +1,46 @@
+<div class="row bank-info">
+  <div class="col-md-12">
+    <h4 class="account-heading">Account</h4>
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-header">
+        Bank account
+      </div>
+      <div class="card-body">
+        <table class="table table-striped table-hover account-info">
+          <thead>
+            <tr>
+              <th>Money</th>
+              <th>Food</th>
+              <th>Gasoline</th>
+              <th>Munition</th>
+              <th>Steel</th>
+              <th>Aluminum</th>
+              <th>Uranium</th>
+              <th>Coal</th>
+              <th>Oil</th>
+              <th>Lead</th>
+              <th>Iron</th>
+              <th>Bauxite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$<%= Number(account.money).toLocaleString() %></td>
+              <td><%= Number(account.food).toLocaleString() %></td>
+              <td><%= Number(account.gasoline).toLocaleString() %></td>
+              <td><%= Number(account.munition).toLocaleString() %></td>
+              <td><%= Number(account.steel).toLocaleString() %></td>
+              <td><%= Number(account.alum).toLocaleString() %></td>
+              <td><%= Number(account.ura).toLocaleString() %></td>
+              <td><%= Number(account.coal).toLocaleString() %></td>
+              <td><%= Number(account.oil).toLocaleString() %></td>
+              <td><%= Number(account.lead).toLocaleString() %></td>
+              <td><%= Number(account.iron).toLocaleString() %></td>
+              <td><%= Number(account.bauxite).toLocaleString() %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

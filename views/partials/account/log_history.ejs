@@ -1,0 +1,82 @@
+<div class="history-logs" id="logs-area">
+  <p>Your logs history</p>
+  <div class="manually">
+    <form class="form-horizontal" action="/account/addLog" method="POST">
+      <div class="form-group">
+        <select name="type">
+          <option value="Deposit">Deposit</option>
+          <option value="Withdraw">Withdraw</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="text" name="money" />
+        <input type="text" name="food" />
+        <input type="text" name="gasoline" />
+        <input type="text" name="munition" />
+        <input type="text" name="steel" />
+        <input type="text" name="alum" />
+        <input type="text" name="ura" />
+        <input type="text" name="coal" />
+        <input type="text" name="oil" />
+        <input type="text" name="lead" />
+        <input type="text" name="iron" />
+        <input type="text" name="bauxite" />
+        <input type="submit" />
+      </div>
+    </form>
+  </div>
+  <!-- <div class="automatically">
+    <% if (error_message != '') { %>
+    <p><%= error_message %></p>
+    <% } %>
+    <form action="/account/addLog" method="POST">
+      <select name="type">
+        <option value="Deposit">Deposit</option>
+        <option value="Withdraw">Withdraw</option>
+      </select>
+      <textarea name="resource" id="autoForm" cols="25" rows="5"></textarea>
+      <input type="submit" />
+    </form>
+  </div> -->
+    <table class="logs">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Money</th>
+          <th>Food</th>
+          <th>Gasoline</th>
+          <th>Munition</th>
+          <th>Steel</th>
+          <th>Aluminum</th>
+          <th>Uranium</th>
+          <th>Coal</th>
+          <th>Oil</th>
+          <th>Lead</th>
+          <th>Iron</th>
+          <th>Bauxite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% logs.forEach(log => { %>
+        <tr>
+          <td><%= log.date %></td>
+          <td><%= log.type %></td>
+          <td>$<%= Number(log.resources.money).toLocaleString() %></td>
+          <td><%= Number(log.resources.food).toLocaleString() %></td>
+          <td><%= Number(log.resources.gasoline).toLocaleString() %></td>
+          <td><%= Number(log.resources.munition).toLocaleString() %></td>
+          <td><%= Number(log.resources.steel).toLocaleString() %></td>
+          <td><%= Number(log.resources.alum).toLocaleString() %></td>
+          <td><%= Number(log.resources.ura).toLocaleString() %></td>
+          <td><%= Number(log.resources.coal).toLocaleString() %></td>
+          <td><%= Number(log.resources.oil).toLocaleString() %></td>
+          <td><%= Number(log.resources.lead).toLocaleString() %></td>
+          <td><%= Number(log.resources.iron).toLocaleString() %></td>
+          <td><%= Number(log.resources.bauxite).toLocaleString() %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
