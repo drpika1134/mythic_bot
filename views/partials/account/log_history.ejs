@@ -1,4 +1,4 @@
-<div class="add-log">
+<fieldset class="add-log">
   <h4>Add a new log</h4>
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -8,12 +8,13 @@
       <a class="nav-link" data-toggle="tab" href="#automatic">Automatic</a>
     </li>
   </ul>
-  <div id="myTabContent" class="tab-content mt-3">
+  <fieldset id="myTabContent" class="tab-content mt-3">
     <div class="tab-pane fade active show" id="manual">
       <form
         class="form-inline manual-form"
         action="/account/addLog"
         method="POST"
+        autocomplete="off"
       >
         <fieldset>
           <div class="form-group">
@@ -106,33 +107,40 @@
         </fieldset>
       </form>
     </div>
-    <div class="tab-pane fade" id="automatic">
-      <p>
-        Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-        single-origin coffee squid. Exercitation +1 labore velit, blog sartorial
-        PBR leggings next level wes anderson artisan four loko farm-to-table
-        craft beer twee. Qui photo booth letterpress, commodo enim craft beer
-        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud
-        organic, assumenda labore aesthetic magna delectus mollit.
-      </p>
-    </div>
-  </div>
-</div>
-<div class="history-logs" id="logs-area">
-  <p>Your logs history</p>
-  <!-- <div class="automatically">
-    <% if (error_message != '') { %>
-    <p><%= error_message %></p>
-    <% } %>
-    <form action="/account/addLog" method="POST">
-      <select name="type">
-        <option value="Deposit">Deposit</option>
-        <option value="Withdraw">Withdraw</option>
-      </select>
-      <textarea name="resource" id="autoForm" cols="25" rows="5"></textarea>
-      <input type="submit" />
-    </form>
-  </div> -->
+    <fieldset class="tab-pane fade" id="automatic">
+      <% if (error_message != '') { %>
+      <p><%= error_message %></p>
+      <% } %>
+      <form
+        action="/account/addLog"
+        class="form-inline automatic-form"
+        method="POST"
+      >
+        <fieldset>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type" id="type" class="form-control">
+              <option value="Deposit">Deposit</option>
+              <option value="Withdraw">Withdraw</option>
+            </select>
+          </div>
+          <div class="row">
+            <textarea
+              name="resource"
+              id="autoForm"
+              cols="25"
+              rows="5"
+              class="form-control"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+      </form>
+    </fieldset>
+  </fieldset>
+</fieldset>
+<div class="history-logs mt-4" id="logs-area">
+  <h4 class="mb-3">Your logs history</h4>
   <table class="logs">
     <thead>
       <tr>
