@@ -44,9 +44,9 @@ router.post(
   }
 )
 // Account
-router.get('/account', ensureAuthenticated, (req, res) => {
+router.get('/account', ensureAuthenticated, (req, res, next) => {
   const { name } = req.user
-  Log.find({ name }, (err, logs) => {
+  Log.find({ name }, null, { sort: { createdAt: -1 } }, (err, logs) => {
     if (err) {
       next('error')
       return
