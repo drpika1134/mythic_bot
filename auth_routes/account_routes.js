@@ -19,7 +19,7 @@ const bank = require('../utils/bank')
 router.post('/addLog', ensureAuthenticated, (req, res, next) => {
   const data = req.body
   if (data.resource == undefined) {
-    manual(data, req, next)
+    manual(data, req, res, next)
   }
 
   if (data.resource != undefined) {
@@ -27,7 +27,7 @@ router.post('/addLog', ensureAuthenticated, (req, res, next) => {
   }
 })
 
-function manual(data, req, next) {
+function manual(data, req, res, next) {
   const money = data.money
   if (money.substring(0, 1) == '$') {
     data.money = money.slice(1, money.length)
@@ -89,7 +89,7 @@ function manual(data, req, next) {
     }
   })
   newLog.save()
-  res.redirect('/account')
+  res.redirect('/account#logs-area')
 }
 
 function automatic(data, req, res, next) {
