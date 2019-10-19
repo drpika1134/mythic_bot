@@ -63,6 +63,8 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use('/static', express.static('static'))
+
 // Routes
 app.use('/', require('./auth_routes/auth_routes.js'))
 app.use('/account', require('./auth_routes/account_routes.js'))
