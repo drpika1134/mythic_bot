@@ -1,0 +1,192 @@
+<div class="add-log">
+  <h4>Add a new log</h4>
+  <!-- Nav tab -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#manual">Manual</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#automatic">Automatic</a>
+    </li>
+  </ul>
+  <!-- Tab content -->
+  <fieldset id="myTabContent" class="tab-content mt-3">
+    <div class="tab-pane fade active show" id="manual">
+      <form
+        class="form-inline manual-form"
+        action="/account/addLog"
+        method="POST"
+        autocomplete="off"
+      >
+        <fieldset>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type" id="type" class="form-control">
+              <option value="Deposit">Deposit</option>
+              <option value="Withdraw">Withdraw</option>
+            </select>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="money">Money</label>
+                <input
+                  type="text"
+                  name="money"
+                  id="money"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <label for="food">Food</label>
+                <input type="text" name="food" id="food" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="gasoline">Gasoline</label>
+                <input
+                  type="text"
+                  name="gasoline"
+                  id="gasoline"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <label for="munition">Munition</label>
+                <input
+                  type="text"
+                  name="munition"
+                  id="munition"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <label for="steel">Steel</label>
+                <input
+                  type="text"
+                  name="steel"
+                  id="steel"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <label for="alum">Aluminum</label>
+                <input type="text" name="alum" id="alum" class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ura">Uranium</label>
+                <input type="text" name="ura" id="ura" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="coal">Coal</label>
+                <input type="text" name="coal" id="coal" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="oil">Oil</label>
+                <input type="text" name="oil" id="oil" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="lead">Lead</label>
+                <input type="text" name="lead" id="lead" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="iron">Iron</label>
+                <input type="text" name="iron" id="iron" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="bauxite">Bauxite</label>
+                <input
+                  type="text"
+                  name="bauxite"
+                  id="bauxite"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <fieldset class="tab-pane fade" id="automatic">
+      <% if (error_message != '') { %>
+      <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">
+          &times;
+        </button>
+        <%= error_message %>
+      </div>
+      <% } %>
+      <form
+        action="/account/addLog"
+        class="form-inline automatic-form"
+        method="POST"
+      >
+        <fieldset>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type" id="type" class="form-control">
+              <option value="Deposit">Deposit</option>
+              <option value="Withdraw">Withdraw</option>
+            </select>
+          </div>
+          <div class="row">
+            <textarea
+              name="resource"
+              id="autoForm"
+              cols="25"
+              rows="5"
+              class="form-control"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+      </form>
+    </fieldset>
+  </fieldset>
+</div>
+<!-- Log history -->
+<div class="history-logs mt-4" id="logs-area">
+  <h4 class="mb-3">Your logs history</h4>
+  <table class="logs table-">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Money</th>
+        <th>Food</th>
+        <th>Gasoline</th>
+        <th>Munition</th>
+        <th>Steel</th>
+        <th>Aluminum</th>
+        <th>Uranium</th>
+        <th>Coal</th>
+        <th>Oil</th>
+        <th>Lead</th>
+        <th>Iron</th>
+        <th>Bauxite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% logs.forEach(log => { %>
+      <tr>
+        <td><%= log.date %></td>
+        <td><%= log.type %></td>
+        <td>$<%= Number(log.resources.money).toLocaleString() %></td>
+        <td><%= Number(log.resources.food).toLocaleString() %></td>
+        <td><%= Number(log.resources.gasoline).toLocaleString() %></td>
+        <td><%= Number(log.resources.munition).toLocaleString() %></td>
+        <td><%= Number(log.resources.steel).toLocaleString() %></td>
+        <td><%= Number(log.resources.alum).toLocaleString() %></td>
+        <td><%= Number(log.resources.ura).toLocaleString() %></td>
+        <td><%= Number(log.resources.coal).toLocaleString() %></td>
+        <td><%= Number(log.resources.oil).toLocaleString() %></td>
+        <td><%= Number(log.resources.lead).toLocaleString() %></td>
+        <td><%= Number(log.resources.iron).toLocaleString() %></td>
+        <td><%= Number(log.resources.bauxite).toLocaleString() %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
