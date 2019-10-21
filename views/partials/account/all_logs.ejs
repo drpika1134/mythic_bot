@@ -1,0 +1,46 @@
+<!-- Log history -->
+<div class="history-logs mt-4" id="logs-area">
+  <h4 class="mb-3">All logs history</h4>
+  <table class="logs">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Money</th>
+        <th>Food</th>
+        <th>Gasoline</th>
+        <th>Munition</th>
+        <th>Steel</th>
+        <th>Aluminum</th>
+        <th>Uranium</th>
+        <th>Coal</th>
+        <th>Oil</th>
+        <th>Lead</th>
+        <th>Iron</th>
+        <th>Bauxite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% logs.forEach(log => { %>
+      <tr>
+        <td><%= log.date %></td>
+        <td><%= log.name %></td>
+        <td><%= log.type %></td>
+        <td>$<%= Number(log.resources.money).toLocaleString() %></td>
+        <td><%= Number(log.resources.food).toLocaleString() %></td>
+        <td><%= Number(log.resources.gasoline).toLocaleString() %></td>
+        <td><%= Number(log.resources.munition).toLocaleString() %></td>
+        <td><%= Number(log.resources.steel).toLocaleString() %></td>
+        <td><%= Number(log.resources.alum).toLocaleString() %></td>
+        <td><%= Number(log.resources.ura).toLocaleString() %></td>
+        <td><%= Number(log.resources.coal).toLocaleString() %></td>
+        <td><%= Number(log.resources.oil).toLocaleString() %></td>
+        <td><%= Number(log.resources.lead).toLocaleString() %></td>
+        <td><%= Number(log.resources.iron).toLocaleString() %></td>
+        <td><%= Number(log.resources.bauxite).toLocaleString() %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
