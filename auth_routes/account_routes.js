@@ -15,6 +15,24 @@ const Log = require('../models/Log.js')
 const UTC_time = require('../utils/get_date')
 const bank = require('../utils/bank')
 
+// View all logs route
+router.get('/all', ensureAuthenticated, (req, res, next) => {
+  Log.find()
+    .sort({ createdAt: -1 })
+    .exec((err, logs) => {
+      if (err) {
+        next('error')
+        return
+      } else {
+        return res.render('members', {
+          user: req.user.name,
+          account: req.user.account,
+          logs
+        })
+      }
+    })
+})
+
 // Handling POST request to '/addLog'
 router.post('/addLog', ensureAuthenticated, (req, res, next) => {
   const data = req.body
