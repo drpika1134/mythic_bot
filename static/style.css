@@ -12,6 +12,11 @@ body {
   margin-top: 20px !important;
 }
 
+.all-bank-info small {
+  font-size: 15px;
+  margin-left: 10px;
+}
+
 tr:nth-child(even) {
   background-color: #424242;
 }
