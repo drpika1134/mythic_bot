@@ -49,32 +49,16 @@ router.get('/account', ensureAuthenticated, (req, res, next) => {
   Promise.all([
     Log.find({ name }, null, { sort: { createdAt: -1 } }),
     User.find({ name: { $ne: name } })
-  ]).then(([logs, users]) => {
-    return res.render('account', {
-      user: name,
-      account: req.user.account,
-      logs,
-      users
+  ])
+    .then(([logs, users]) => {
+      return res.render('account', {
+        user: name,
+        account: req.user.account,
+        logs,
+        users
+      })
     })
-  })
-  // Log.find({ name }, null, { sort: { createdAt: -1 } }, (err, logs) => {
-  //   if (err) {
-  //     next('error')
-  //     return
-  //   }
-  //   User.find({ name: { $ne: name } }, (err, users) => {
-  //     if (err) {
-  //       next('error')
-  //       return
-  //     }
-  //     return res.render('account', {
-  //       user: name,
-  //       account: req.user.account,
-  //       logs,
-  //       users
-  //     })
-  //   })
-  // })
+    .catch(next('error'))
 })
 // Handle Logout
 router.get('/logout', (req, res) => {
