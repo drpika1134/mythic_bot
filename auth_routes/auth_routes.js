@@ -17,9 +17,16 @@ const loginRateLimit = rateLimit({
 // DB Models
 const User = require('../models/User.js')
 const Log = require('../models/Log.js')
+function preventCache(req, res, next) {
+  res.set(
+    'Cache-Control',
+    'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0'
+  )
+  next()
+}
 
 // Login Route
-router.get('/', forwardAuthenticate, (req, res) => {
+router.get('/', [forwardAuthenticate, preventCache], (req, res) => {
   res.render('login')
 })
 
@@ -44,33 +51,29 @@ router.post(
   }
 )
 // Account
-router.get('/account', ensureAuthenticated, (req, res, next) => {
-  const { name } = req.user
-  Log.find({ name }, null, { sort: { createdAt: -1 } }, (err, logs) => {
-    if (err) {
-      next('error')
-    }
-    User.find({ name: { $ne: name } }, (err, users) => {
+router.get(
+  '/account',
+  [ensureAuthenticated, preventCache],
+  (req, res, next) => {
+    const { name } = req.user
+    Log.find({ name }, null, { sort: { createdAt: -1 } }, (err, logs) => {
       if (err) {
         next('error')
       }
-      res.render('account', {
-        user: name,
-        account: req.user.account,
-        logs,
-        users
+      User.find({ name: { $ne: name } }, (err, users) => {
+        if (err) {
+          next('error')
+        }
+        res.render('account', {
+          user: name,
+          account: req.user.account,
+          logs,
+          users
+        })
       })
     })
-  })
-  // Promise.all([
-  //   Log.find({ name }, null, { sort: { createdAt: -1 } }),
-  //   User.find({ name: { $ne: name } })
-  // ])
-  //   .then(([logs, users]) => {
-  //     return
-  //   })
-  //   .catch(next('error'))
-})
+  }
+)
 // Handle Logout
 router.get('/logout', (req, res) => {
   req.logOut()
