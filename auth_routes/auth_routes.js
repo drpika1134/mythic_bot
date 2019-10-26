@@ -40,25 +40,36 @@ router.post(
     } else {
       req.session.cookie.expires = false // Cookie expires at end of session
     }
-    res.redirect('/account')
+    return res.redirect('/account')
   }
 )
 // Account
 router.get('/account', ensureAuthenticated, (req, res, next) => {
   const { name } = req.user
-  Promise.all([
-    Log.find({ name }, null, { sort: { createdAt: -1 } }),
-    User.find({ name: { $ne: name } })
-  ])
-    .then(([logs, users]) => {
-      return res.render('account', {
+  Log.find({ name }, null, { sort: { createdAt: -1 } }, (err, logs) => {
+    if (err) {
+      next('error')
+    }
+    User.find({ name: { $ne: name } }, (err, users) => {
+      if (err) {
+        next('error')
+      }
+      res.render('account', {
         user: name,
         account: req.user.account,
         logs,
         users
       })
     })
-    .catch(next('error'))
+  })
+  // Promise.all([
+  //   Log.find({ name }, null, { sort: { createdAt: -1 } }),
+  //   User.find({ name: { $ne: name } })
+  // ])
+  //   .then(([logs, users]) => {
+  //     return
+  //   })
+  //   .catch(next('error'))
 })
 // Handle Logout
 router.get('/logout', (req, res) => {
